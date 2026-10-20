@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="TimePilot 時間導航：將待辦事項安排成具體可執行的工作時段。資料儲存於你的瀏覽器。">
+<title>TimePilot｜時間導航 AI</title>
+<style>
+:root{--ink:#172d32;--muted:#607275;--green:#176959;--mint:#dff3eb;--paper:#f5f6f2;--line:#dce3dd;--orange:#8c5315;--white:#fff; font-family:Inter,"Noto Sans TC",system-ui,-apple-system,"Microsoft JhengHei",sans-serif;color:var(--ink);background:var(--paper);font-size:15px}*{box-sizing:border-box}body{margin:0}button,input,select{font:inherit}button{cursor:pointer;border:1px solid var(--line);border-radius:9px;background:white;color:var(--ink);padding:10px 14px;font-weight:600}button:hover{background:#edf3ee}button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid #c59c40;outline-offset:3px}button.primary{background:var(--green);border-color:var(--green);color:white}button.primary:hover{background:#105445}button.small{padding:7px 10px;font-size:.85rem;min-height:36px}button.danger{color:#a33737}button.ghost{background:transparent;border-color:#4b6365;color:#e2eeea}h1,h2,h3,p{margin:0}h1{font-size:clamp(1.7rem,3vw,2.35rem);letter-spacing:-.05em;line-height:1.3}h2{font-size:1.15rem}h3{font-size:1rem}p{line-height:1.7}small,.muted{color:var(--muted)}.app{display:grid;grid-template-columns:230px minmax(0,1fr);min-height:100vh}.sidebar{background:#193336;color:#eaf5ed;padding:32px 22px;display:flex;flex-direction:column;gap:36px}.brand{display:flex;align-items:center;gap:10px;font-size:1.5rem;font-weight:750;letter-spacing:-.06em}.logo{width:35px;height:35px;display:grid;place-items:center;border:1px solid #79968c;border-radius:50%;color:#c9e4ba;font-size:25px}.brand-sub{color:#a9c1b7;font-size:.8rem;margin-top:8px;letter-spacing:.12em}.nav{display:flex;flex-direction:column;gap:7px}.nav a{color:#cbded5;text-decoration:none;padding:13px;border-radius:9px;font-weight:600}.nav a:first-child{background:#2c4949;color:#e5f4c7}.nav span{margin-right:10px;color:#b8d0b9}.side-note{margin-top:auto;padding-top:30px;color:#b7cdc5;font-size:.85rem;line-height:1.9}.side-note strong{color:#e1edc1;font-weight:500}.main{padding:34px clamp(20px,3.6vw,55px) 45px;max-width:1700px;width:100%;margin:auto}.topline{display:flex;justify-content:space-between;gap:15px;align-items:center;color:var(--muted);font-size:.8rem;letter-spacing:.04em;margin-bottom:24px}.pill{border-radius:30px;background:#e7eee5;padding:6px 11px;color:#47603f;white-space:nowrap;font-size:.78rem}.hero{display:flex;justify-content:space-between;align-items:center;gap:24px}.hero p{margin-top:10px;color:var(--muted)}.hero-actions{display:flex;gap:9px;flex-wrap:wrap}.hero-actions button.primary{padding:14px 22px}.status{margin-top:22px;background:#e7f0e9;border:1px solid #d5e5d8;border-radius:10px;padding:12px 16px;display:flex;gap:12px;align-items:center;font-size:.87rem;line-height:1.6}.status.stale{background:#fff3df;border-color:#ead4ae;color:#754915}.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin:24px 0}.stat{background:#fff;border:1px solid var(--line);border-radius:12px;padding:18px 20px}.stat .label{font-size:.8rem;color:var(--muted)}.stat .value{font-size:1.8rem;font-weight:650;margin-top:9px;letter-spacing:-.04em}.stat .unit{font-size:.85rem;font-weight:400;margin-left:5px;color:var(--muted)}.stat.accent{background:#e7efdd}.workspace{display:grid;grid-template-columns:minmax(0,1.65fr) minmax(310px,1fr);gap:22px;align-items:start}.panel{background:white;border:1px solid var(--line);border-radius:13px;overflow:hidden}.panel-head{display:flex;align-items:center;justify-content:space-between;padding:20px 22px;gap:12px}.panel-head small{display:block;margin-top:6px;line-height:1.5}.stack{display:grid;gap:20px}.legend{display:flex;flex-wrap:wrap;gap:15px;font-size:.76rem;padding:0 22px 17px;color:var(--muted)}.dot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:5px;background:var(--green)}.dot.fixed{background:#7695b5}.dot.rest{background:#d0b970}.days{display:flex;gap:7px;overflow-x:auto;padding:0 20px 17px;scrollbar-width:thin}.day-btn{flex:0 0 58px;padding:9px 5px;font-weight:400;font-size:.74rem}.day-btn b{display:block;font-size:1.1rem;margin:5px 0}.day-btn.selected{background:var(--green);color:white;border-color:var(--green)}.day-btn small{color:inherit}.timeline{border-top:1px solid var(--line);padding:20px 22px;min-height:330px}.day-title{font-weight:650;font-size:.9rem;margin-bottom:20px;display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap}.event{display:grid;grid-template-columns:60px minmax(0,1fr);gap:13px;margin-bottom:13px}.time{color:var(--muted);font-size:.8rem;padding-top:12px;line-height:1.6;font-variant-numeric:tabular-nums}.time span{font-size:.72rem;color:#7b8b8c}.event-body{padding:13px 15px;border-radius:9px;border-left:3px solid var(--green);background:#eaf5ef;min-width:0}.event-body.fixed{background:#eef2f8;border-color:#7897b8}.event-body.rest{background:#f7f3e6;border-color:#c7b576;padding-top:10px;padding-bottom:10px}.event-body h3{overflow-wrap:anywhere;font-size:.92rem;font-weight:600}.event-meta{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;font-size:.73rem;color:var(--muted);margin-top:6px}.empty{padding:36px 18px;text-align:center;color:var(--muted);font-size:.9rem;line-height:1.9}.empty .empty-icon{font-size:30px;margin-bottom:12px;color:#89a294}.list{padding:0 20px 12px}.item{padding:15px 0;border-top:1px solid #e8ece6}.item-top{display:flex;justify-content:space-between;align-items:start;gap:10px}.item h3{line-height:1.5;overflow-wrap:anywhere;font-size:.94rem}.item p{font-size:.78rem;color:var(--muted);margin-top:6px}.item-actions{display:flex;gap:5px;flex-wrap:wrap;margin-top:10px}.priority{font-size:.7rem;padding:3px 7px;border-radius:5px;white-space:nowrap;background:#f1eee5;color:#766640}.priority.high{background:#fae9df;color:#9e5b2c}.priority.low{background:#eef1f2;color:#627479}.completed h3{text-decoration:line-through;color:#7c8987}.warning{font-size:.8rem;color:#925b20;margin-top:6px;line-height:1.7}.warning-box{border-top:1px solid var(--line);padding:16px 22px;background:#fffbf1;font-size:.85rem;line-height:1.8}.settings{padding:0 22px 20px}.settings-row{display:flex;gap:12px;flex-wrap:wrap}.settings-row label{flex:1;min-width:100px}.settings small{display:block;margin-top:12px;line-height:1.8}label{display:block;font-size:.85rem;font-weight:550}input,select{display:block;width:100%;border:1px solid #cdd8d0;border-radius:8px;background:white;color:var(--ink);padding:10px;margin-top:7px;min-height:43px;min-width:0}input[type=checkbox]{display:inline;width:18px;min-height:18px;margin:0;accent-color:var(--green)}.footer{display:flex;justify-content:space-between;gap:15px;flex-wrap:wrap;color:var(--muted);font-size:.75rem;margin-top:25px;line-height:1.8}dialog{border:1px solid var(--line);border-radius:15px;padding:25px;width:min(480px,calc(100% - 28px));color:var(--ink);box-shadow:0 20px 80px #142d3233}dialog::backdrop{background:#152c3277}dialog h2{margin-bottom:20px}dialog label{margin-top:15px}.form-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}.dialog-actions{display:flex;justify-content:flex-end;gap:10px;margin-top:24px}.error{color:#a33a31;font-size:.85rem;line-height:1.6;margin-top:12px}.toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:#203c38;color:white;padding:12px 22px;border-radius:10px;z-index:10;max-width:90%;font-size:.9rem;box-shadow:0 5px 30px #0002}.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)}[hidden]{display:none!important}@media(min-width:1600px){.workspace{grid-template-columns:minmax(0,1.8fr) minmax(350px,1fr)}}@media(max-width:1100px){.app{grid-template-columns:185px minmax(0,1fr)}.sidebar{padding:28px 16px}.main{padding:27px 22px}.workspace{grid-template-columns:minmax(0,1fr)}.stack{grid-template-columns:1fr 1fr}.stack .panel:last-child{grid-column:1/-1}.hero{align-items:start;flex-direction:column}.stats{gap:9px}.stat{padding:16px 12px}}@media(max-width:650px){.app{display:block}.sidebar{padding:16px 20px;display:flex;flex-direction:row;align-items:center;justify-content:space-between;gap:12px}.brand{font-size:1.3rem}.brand-sub{font-size:.65rem;margin-top:3px}.logo{width:29px;height:29px;font-size:20px}.nav,.side-note{display:none}.main{padding:20px 15px}.topline{font-size:.7rem;margin-bottom:19px}.stats{grid-template-columns:1fr 1fr;margin:18px 0}.stat .value{font-size:1.65rem}.hero-actions{width:100%}.hero-actions .primary{flex:1}.stack{grid-template-columns:1fr}.panel-head{padding:18px}.timeline{padding:18px 15px}.event{grid-template-columns:49px minmax(0,1fr);gap:9px}.legend{padding-left:18px}.status{align-items:start}.panel-head h2{font-size:1.05rem}button{min-height:42px}.item-actions button{min-height:40px}.footer{font-size:.7rem}}
+</style>
+</head>
+<body>
+<div class="app">
+<aside class="sidebar"><div><div class="brand"><span class="logo" aria-hidden="true">↗</span>TimePilot</div><div class="brand-sub">時間導航 AI</div></div><nav class="nav" aria-label="頁面導覽"><a href="#schedule"><span>▦</span>我的時間表</a><a href="#tasks"><span>☑</span>待辦事項</a><a href="#fixed"><span>◷</span>固定行程</a><a href="#settings"><span>⚙</span>排程設定</a></nav><div class="side-note"><strong>留一點時間，給從容。</strong><br>把截止日期，變成開始的時間。<br><br>TAICA · 第五週 MVP<br>規則式排程 · 資料只留在本機</div></aside>
+<main class="main"><div class="topline"><span id="today-label"></span><span class="pill">● 本機工作空間</span></div>
+<header class="hero"><div><h1>讓下一步，有個時間。</h1><p>放進行程與待辦，找出今天可以開始的時段。</p></div><div class="hero-actions"><button id="demo-btn">載入範例</button><button class="primary" id="schedule-btn">↗ 產生排程</button></div></header>
+<div id="status" class="status" role="status" aria-live="polite"></div><div id="storage-error" class="status stale" role="alert" hidden></div>
+<section class="stats" aria-label="工作摘要"><div class="stat"><div class="label">待處理事項</div><div class="value" id="stat-count">0</div></div><div class="stat"><div class="label">剩餘預估工時</div><div class="value" id="stat-total">0<span class="unit">小時</span></div></div><div class="stat accent"><div class="label" id="arranged-label">已安排工時</div><div class="value" id="stat-planned">—</div></div><div class="stat"><div class="label" id="remaining-label">未安排工時</div><div class="value" id="stat-left">—</div></div></section>
+<div class="workspace"><section class="panel" id="schedule"><div class="panel-head"><div><h2>我的時間表</h2><small id="range-label">未來 14 天，從今天開始</small></div><span class="pill">14 天</span></div><div class="legend"><span><i class="dot"></i>自動工作</span><span><i class="dot fixed"></i>固定行程</span><span><i class="dot rest"></i>休息</span></div><div class="days" id="days" aria-label="選擇日期"></div><div id="timeline" class="timeline"></div><div id="warnings" class="warning-box" hidden></div></section>
+<div class="stack"><section class="panel" id="tasks"><div class="panel-head"><div><h2>待辦事項</h2><small>只有期限，也能找到開始的時間</small></div><button class="small" id="add-task">＋ 新增</button></div><div id="task-list" class="list"></div></section>
+<section class="panel" id="fixed"><div class="panel-head"><div><h2>固定行程</h2><small>排程會避開已經約好的時間</small></div><button class="small" id="add-event">＋ 新增</button></div><div id="event-list" class="list"></div></section>
+<section class="panel" id="settings"><div class="panel-head"><div><h2>排程設定</h2><small>每天可以安排工作的時間</small></div></div><form id="settings-form" class="settings"><div class="settings-row"><label>開始<input type="time" id="work-start" required step="900"></label><label>結束<input type="time" id="work-end" required step="900"></label><button type="submit" style="align-self:end">套用</button></div><div id="settings-error" class="error" role="alert"></div><small>每段最多 90 分鐘 · 工作段間至少休息 15 分鐘<br>優先期限，再看重要程度；能提前時，盡量留一天緩衝。</small></form></section></div></div>
+<footer class="footer"><span>TimePilot MVP · 規格 v1.3<br>使用規則式排程，未串接 AI 模型或 Google Calendar。</span><span>資料保存在此瀏覽器；清除網站資料會一併刪除。<br>不同裝置、瀏覽器及網站網址不會自動同步。</span></footer></main></div>
+<dialog id="task-dialog"><form id="task-form"><h2 id="task-dialog-title">新增待辦事項</h2><input type="hidden" name="id"><label>待辦名稱<input name="name" maxlength="100" required placeholder="例如：完成課堂簡報"></label><label>截止日期<input type="date" name="due" required><small>視為當日 23:59 截止。</small></label><div class="form-row"><label>剩餘預估工時（小時）<input name="hours" type="number" min="0.25" step="0.25" max="10000" value="1" required></label><label>重要程度<select name="priority"><option value="high">高</option><option value="medium" selected>中</option><option value="low">低</option></select></label></div><div id="task-error" class="error" role="alert"></div><div class="dialog-actions"><button type="button" data-close="task-dialog">取消</button><button type="submit" class="primary">儲存待辦</button></div></form></dialog>
+<dialog id="event-dialog"><form id="event-form"><h2 id="event-dialog-title">新增固定行程</h2><input type="hidden" name="id"><label>行程名稱<input name="name" required maxlength="100" placeholder="例如：課堂討論"></label><label>日期<input name="date" type="date" required></label><div class="form-row"><label>開始時間<input name="start" type="time" required step="900"></label><label>結束時間<input name="end" type="time" required step="900"></label></div><div id="event-error" class="error" role="alert"></div><div class="dialog-actions"><button type="button" data-close="event-dialog">取消</button><button type="submit" class="primary">儲存行程</button></div></form></dialog>
+<div id="toast" class="toast" role="status" hidden></div>
+<script>
+'use strict';
+/* Pure scheduling core. All durations are integer minutes; all dates are local. */
+const TP=(()=>{
+const priority={high:0,medium:1,low:2};
+const dateKey=d=>`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+const dayDate=s=>new Date(s+'T00:00:00');
+const addDays=(s,n)=>{const d=dayDate(s);d.setDate(d.getDate()+n);return dateKey(d)};
+const minutes=s=>Number(s.slice(0,2))*60+Number(s.slice(3,5));
+const clock=n=>String(Math.floor(n/60)).padStart(2,'0')+':'+String(n%60).padStart(2,'0');
+const anchorFor=now=>({date:dateKey(now),minute:Math.ceil((now.getHours()*60+now.getMinutes()+now.getSeconds()/60+now.getMilliseconds()/60000)/15)*15});
+const overlaps=(a,b)=>a.start<b.end&&b.start<a.end;
+function dayWorksValid(works,fixed){
+ const sorted=works.slice().sort((a,b)=>a.start-b.start);
+ for(let i=0;i<sorted.length;i++){
+  const a=sorted[i];if(a.end-a.start>90||a.end<=a.start||fixed.some(f=>overlaps(a,f)))return false;
+  if(i){const prev=sorted[i-1];if(prev.end>a.start)return false;let rest=false;
+   for(let s=prev.end;s+15<=a.start;s+=15){if(!fixed.some(f=>overlaps({start:s,end:s+15},f))){rest=true;break}}
+   if(!rest)return false;
+  }
+ }return true;
+}
+function schedule(data,anchor){
+ const dates=Array.from({length:14},(_,i)=>addDays(anchor.date,i));
+ const active=data.tasks.filter(t=>!t.done).slice().sort((a,b)=>a.due.localeCompare(b.due)||priority[a.priority]-priority[b.priority]||a.order-b.order||a.id.localeCompare(b.id));
+ const eligible=active.filter(t=>t.due>=dates[0]&&t.due<=dates[13]);
+ const fixedByDate=Object.fromEntries(dates.map(d=>[d,data.events.filter(e=>e.date===d).map(e=>({start:minutes(e.start),end:minutes(e.end)}))]));
+ const lower=d=>Math.max(minutes(data.settings.start),d===anchor.date?anchor.minute:0);
+ const upper=minutes(data.settings.end);
+ function run(spread){
+  const byDate=Object.fromEntries(dates.map(d=>[d,[]]));const assigned={};
+  function candidate(d,t,left){
+   const works=byDate[d],fixed=fixedByDate[d];
+   for(let s=lower(d);s+15<=upper;s+=15){
+    if(fixed.concat(works).some(x=>overlaps({start:s,end:s+15},x)))continue;
+    for(let len=Math.min(90,left,upper-s);len>=15;len-=15){
+     const a={date:d,start:s,end:s+len,taskId:t.id,name:t.name,type:'work'};
+     if(dayWorksValid(works.concat(a),fixed))return a;
+    }
+   }return null;
+  }
+  for(const t of eligible){let left=t.minutes;const possible=dates.filter(d=>d<=t.due);const taskLoad={};
+   function fill(dayPool){
+    while(left>0){let options=dayPool.slice();
+     if(spread)options.sort((a,b)=>(taskLoad[a]||0)-(taskLoad[b]||0)||a.localeCompare(b));
+     let found=null;for(const d of options){found=candidate(d,t,left);if(found)break}
+     if(!found)break;
+     const len=found.end-found.start;byDate[found.date].push(found);taskLoad[found.date]=(taskLoad[found.date]||0)+len;left-=len;
+    }
+   }
+   if(spread)fill(possible.filter(d=>d<addDays(t.due,-1)));
+   fill(possible);assigned[t.id]=t.minutes-left;
+  }
+  return {byDate,assigned};
+ }
+ const baseline=run(false),distributed=run(true);
+ const safe=eligible.every(t=>(distributed.assigned[t.id]||0)>=(baseline.assigned[t.id]||0));
+ const chosen=safe?distributed:baseline;const blocks=[];
+ for(const d of dates){const works=chosen.byDate[d].sort((a,b)=>a.start-b.start);blocks.push(...works);
+  for(let i=1;i<works.length;i++)for(let s=works[i-1].end;s+15<=works[i].start;s+=15){
+   if(!fixedByDate[d].some(f=>overlaps({start:s,end:s+15},f))){blocks.push({date:d,start:s,end:s+15,type:'rest',name:'休息一下'});break}
+  }
+ }
+ blocks.sort((a,b)=>a.date.localeCompare(b.date)||a.start-b.start);
+ const remaining=active.map(t=>({id:t.id,name:t.name,minutes:t.minutes-(chosen.assigned[t.id]||0),reason:t.due<dates[0]?'overdue':t.due>dates[13]?'outside':'capacity'})).filter(t=>t.minutes>0);
+ return {anchor,dates,blocks,remaining,assigned:chosen.assigned,strategy:safe?'distributed':'baseline',total:active.reduce((s,t)=>s+t.minutes,0)};
+}
+return {dateKey,addDays,dayDate,minutes,clock,anchorFor,overlaps,dayWorksValid,schedule};
+})();
+if(typeof module!=='undefined'&&module.exports)module.exports=TP;
+</script>
+<script>
+(()=>{
+const $=id=>document.getElementById(id),KEY='timepilot.mvp.v1';
+const blank=()=>({version:1,tasks:[],events:[],settings:{start:'09:00',end:'23:00'},nextOrder:0,dirty:true,result:null});
+const timeValid=s=>typeof s==='string'&&/^([01]\d|2[0-3]):(00|15|30|45)$/.test(s);
+const dateValid=s=>typeof s==='string'&&/^\d{4}-\d{2}-\d{2}$/.test(s)&&!isNaN(TP.dayDate(s))&&TP.dateKey(TP.dayDate(s))===s;
+function valid(d){return d&&d.version===1&&Array.isArray(d.tasks)&&Array.isArray(d.events)&&d.settings&&timeValid(d.settings.start)&&timeValid(d.settings.end)&&d.settings.start<d.settings.end&&Number.isInteger(d.nextOrder)&&d.tasks.every(t=>typeof t.id==='string'&&typeof t.name==='string'&&t.name.trim()&&dateValid(t.due)&&Number.isInteger(t.minutes)&&t.minutes>0&&t.minutes%15===0&&['high','medium','low'].includes(t.priority)&&Number.isInteger(t.order)&&typeof t.done==='boolean')&&d.events.every(e=>typeof e.id==='string'&&typeof e.name==='string'&&e.name.trim()&&dateValid(e.date)&&timeValid(e.start)&&timeValid(e.end)&&e.start<e.end)}
+let data=blank(),storageProblem='',selected=TP.dateKey(new Date()),toastTimer;
+try{const raw=localStorage.getItem(KEY);if(raw){const parsed=JSON.parse(raw);if(!valid(parsed))throw Error('invalid');data=parsed;
+ // Recompute saved results with their original anchor, never trust serialized blocks.
+ if(data.result&&data.result.anchor&&dateValid(data.result.anchor.date)&&Number.isInteger(data.result.anchor.minute)&&data.result.anchor.minute>=0&&data.result.anchor.minute<=1440&&data.result.anchor.minute%15===0){if(!data.dirty)data.result=TP.schedule(data,data.result.anchor);else data.result=null}else data.result=null;
+}}catch(e){storageProblem='無法讀取本機資料（可能已損毀或瀏覽器不允許儲存）。目前使用空白工作區；原有資料尚未覆寫。'}
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const hours=n=>Number((n/60).toFixed(2)).toString();
+const priorityText={high:'高',medium:'中',low:'低'};
+const weekday=d=>['日','一','二','三','四','五','六'][TP.dayDate(d).getDay()];
+const pretty=d=>`${Number(d.slice(5,7))}/${Number(d.slice(8,10))}（${weekday(d)}）`;
+function save(){try{localStorage.setItem(KEY,JSON.stringify(data));storageProblem=''}catch(e){storageProblem='此瀏覽器目前無法儲存資料。關閉或重新整理前，請注意本次修改可能遺失。'}storageNotice()}
+function storageNotice(){$('storage-error').hidden=!storageProblem;$('storage-error').textContent=storageProblem}
+function notify(s){$('toast').textContent=s;$('toast').hidden=false;clearTimeout(toastTimer);toastTimer=setTimeout(()=>$('toast').hidden=true,3200)}
+function changed(){data.dirty=true;save();render()}
+function uid(){return typeof crypto.randomUUID==='function'?crypto.randomUUID():Date.now().toString(36)+'-'+Math.random().toString(36).slice(2)}
+function conflict(e){return data.events.some(x=>x.id!==e.id&&x.date===e.date&&TP.overlaps({start:TP.minutes(e.start),end:TP.minutes(e.end)},{start:TP.minutes(x.start),end:TP.minutes(x.end)}))}
+function render(){
+ const today=TP.dateKey(new Date()),dates=Array.from({length:14},(_,i)=>TP.addDays(today,i));if(!dates.includes(selected))selected=today;
+ const stale=data.dirty||!data.result||data.result.anchor.date!==today;
+ const result=stale?null:data.result;
+ $('today-label').textContent=`${today.replaceAll('-',' / ')}　星期${weekday(today)}`;
+ $('status').className='status'+(stale?' stale':'');
+ $('status').textContent=!data.tasks.length&&!data.events.length?'先新增待辦與固定行程，或載入範例，開始安排你的時間。':stale?'● 資料或日期已更新。請產生排程，查看最新可執行的時段。':`✓ 排程已更新 · 起點 ${pretty(result.anchor.date)} ${TP.clock(result.anchor.minute)} · ${result.strategy==='distributed'?'已採用分散安排':'優先保留期限內可安排的工時'}`;
+ $('schedule-btn').textContent=data.result?'↗ 重新排程':'↗ 產生排程';
+ const active=data.tasks.filter(t=>!t.done),total=active.reduce((s,t)=>s+t.minutes,0),planned=result?result.blocks.filter(b=>b.type==='work').reduce((s,b)=>s+b.end-b.start,0):0;
+ $('stat-count').innerHTML=active.length+'<span class="unit">件</span>';
+ $('stat-total').innerHTML=hours(total)+'<span class="unit">小時</span>';
+ $('stat-planned').innerHTML=result?hours(planned)+'<span class="unit">小時</span>':'—';
+ $('stat-left').innerHTML=result?hours(total-planned)+'<span class="unit">小時</span>':'—';
+ $('range-label').textContent=`${pretty(dates[0])} — ${pretty(dates[13])} · 點選日期查看時段`;
+ $('days').innerHTML=dates.map(d=>`<button class="day-btn ${d===selected?'selected':''}" data-date="${d}" aria-pressed="${d===selected}"><span>${d===today?'今天':'週'+weekday(d)}</span><b>${Number(d.slice(8))}</b><small>${Number(d.slice(5,7))}月</small></button>`).join('');
+ const blocks=(result?result.blocks.filter(b=>b.date===selected):[]).concat(data.events.filter(e=>e.date===selected).map(e=>({...e,start:TP.minutes(e.start),end:TP.minutes(e.end),type:'fixed',hasConflict:conflict(e)}))).sort((a,b)=>a.start-b.start||a.end-b.end);
+ $('timeline').innerHTML=`<div class="day-title"><span>${pretty(selected)}</span><span class="muted">可工作 ${esc(data.settings.start)}–${esc(data.settings.end)}</span></div>`+(blocks.length?blocks.map(b=>`<div class="event"><div class="time">${TP.clock(b.start)}<br><span>${TP.clock(b.end)}</span></div><div class="event-body ${b.type}"><h3>${esc(b.name)}</h3><div class="event-meta"><span>${b.type==='fixed'?'固定行程':b.type==='rest'?'真正空閒，不安排其他事項':'自動安排 · '+(priorityText[data.tasks.find(t=>t.id===b.taskId)?.priority]||'中')+'重要程度'}</span><span>${b.end-b.start} 分鐘</span></div>${b.hasConflict?'<div class="warning">與其他固定行程重疊，請檢查。</div>':''}</div></div>`).join(''):`<div class="empty"><div class="empty-icon">◷</div>${stale?'還沒有最新的工作排程。<br>新增待辦後，按「產生排程」。':'這一天沒有安排事項。<br>留點空白，也很好。'}</div>`);
+ const rem=result?result.remaining:[];
+ $('warnings').hidden=!rem.length;
+ $('warnings').innerHTML='<strong>還有一些工作需要留意</strong><br>'+rem.map(r=>`${esc(r.name)}：${hours(r.minutes)} 小時${r.reason==='outside'?'｜本期未排入（截止日超出 14 天）':r.reason==='overdue'?'｜已逾期，請調整截止日期':'｜期限內可用時間不足'}`).join('<br>');
+ $('task-list').innerHTML=data.tasks.length?data.tasks.slice().sort((a,b)=>Number(a.done)-Number(b.done)||a.order-b.order).map(t=>{const r=rem.find(x=>x.id===t.id);return `<article class="item ${t.done?'completed':''}"><div class="item-top"><h3>${esc(t.name)}</h3><span class="priority ${t.priority}">${priorityText[t.priority]}</span></div><p>${pretty(t.due)} 截止 · 剩餘 ${hours(t.minutes)} 小時${t.done?' · 已完成':''}</p>${r?`<div class="warning">${r.reason==='outside'?'本期未排入':r.reason==='overdue'?'已逾期':'未安排'} ${hours(r.minutes)} 小時</div>`:''}<div class="item-actions"><button class="small" data-action="toggle-task" data-id="${esc(t.id)}">${t.done?'恢復待辦':'標記完成'}</button><button class="small" data-action="edit-task" data-id="${esc(t.id)}">編輯</button><button class="small danger" data-action="delete-task" data-id="${esc(t.id)}">刪除</button></div></article>`}).join(''):'<div class="empty">把腦中的待辦放進來。<br>先從一件事開始。</div>';
+ $('event-list').innerHTML=data.events.length?data.events.slice().sort((a,b)=>a.date.localeCompare(b.date)||a.start.localeCompare(b.start)).map(e=>`<article class="item"><h3>${esc(e.name)}</h3><p>${pretty(e.date)} · ${esc(e.start)}–${esc(e.end)}</p>${conflict(e)?'<div class="warning">與其他固定行程重疊</div>':''}<div class="item-actions"><button class="small" data-action="edit-event" data-id="${esc(e.id)}">編輯</button><button class="small danger" data-action="delete-event" data-id="${esc(e.id)}">刪除</button></div></article>`).join(''):'<div class="empty">課程、會議或已約好的行程，<br>都可以先放在這裡。</div>';
+ $('work-start').value=data.settings.start;$('work-end').value=data.settings.end;storageNotice();
+}
+function openTask(id){const f=$('task-form');f.reset();const t=data.tasks.find(x=>x.id===id);f.elements.id.value=t?.id||'';f.elements.name.value=t?.name||'';f.elements.due.value=t?.due||TP.dateKey(new Date());f.elements.hours.value=t?hours(t.minutes):1;f.elements.priority.value=t?.priority||'medium';$('task-error').textContent='';$('task-dialog-title').textContent=t?'編輯待辦事項':'新增待辦事項';$('task-dialog').showModal();f.elements.name.focus()}
+function openEvent(id){const f=$('event-form');f.reset();const e=data.events.find(x=>x.id===id);for(const k of ['id','name','date','start','end'])f.elements[k].value=e?.[k]||({date:TP.dateKey(new Date()),start:'09:00',end:'10:00'}[k]||'');$('event-error').textContent='';$('event-dialog-title').textContent=e?'編輯固定行程':'新增固定行程';$('event-dialog').showModal();f.elements.name.focus()}
+$('add-task').onclick=()=>openTask();$('add-event').onclick=()=>openEvent();
+document.addEventListener('click',ev=>{const b=ev.target.closest('button');if(!b)return;if(b.dataset.close)$(b.dataset.close).close();if(b.dataset.date){selected=b.dataset.date;const x=$('days').scrollLeft;render();$('days').scrollLeft=x;document.querySelector(`[data-date="${selected}"]`)?.focus({preventScroll:true})}const {action,id}=b.dataset;if(!action)return;
+ if(action==='edit-task')openTask(id);if(action==='edit-event')openEvent(id);
+ if(action==='toggle-task'){const t=data.tasks.find(x=>x.id===id);t.done=!t.done;changed();notify(t.done?'已標記完成，請重新排程。':'已恢復待辦，請重新排程。')}
+ if(action==='delete-task'||action==='delete-event'){const list=action==='delete-task'?'tasks':'events';const obj=data[list].find(x=>x.id===id);if(confirm(`確定刪除「${obj.name}」？`)){data[list]=data[list].filter(x=>x.id!==id);changed();notify('已刪除，請重新排程。')}}
+});
+$('task-form').onsubmit=ev=>{ev.preventDefault();const f=ev.target.elements,name=f.name.value.trim(),m=Number(f.hours.value)*60;
+ if(!name||!dateValid(f.due.value)||!Number.isInteger(m)||m<=0||m%15){$('task-error').textContent='請填寫名稱、有效日期，以及以 0.25 小時為單位的工時。';return}
+ let t=data.tasks.find(x=>x.id===f.id.value);if(!t){t={id:uid(),order:data.nextOrder++,done:false};data.tasks.push(t)}Object.assign(t,{name,due:f.due.value,minutes:m,priority:f.priority.value});$('task-dialog').close();changed();notify('待辦已儲存。')};
+$('event-form').onsubmit=ev=>{ev.preventDefault();const f=ev.target.elements,name=f.name.value.trim();if(!name||!dateValid(f.date.value)||!timeValid(f.start.value)||!timeValid(f.end.value)||f.start.value>=f.end.value){$('event-error').textContent='請填寫有效名稱與日期。時間須為 15 分鐘刻度，結束須晚於開始，不支援跨午夜。';return}let e=data.events.find(x=>x.id===f.id.value);if(!e){e={id:uid()};data.events.push(e)}Object.assign(e,{name,date:f.date.value,start:f.start.value,end:f.end.value});$('event-dialog').close();changed();notify(conflict(e)?'已儲存，但與其他固定行程重疊。':'行程已儲存。')};
+$('settings-form').onsubmit=ev=>{ev.preventDefault();const start=$('work-start').value,end=$('work-end').value;if(!timeValid(start)||!timeValid(end)||start>=end){$('settings-error').textContent='結束須晚於開始，時間須為 15 分鐘刻度，不支援跨午夜。';return}$('settings-error').textContent='';data.settings={start,end};changed();notify('工作時間已更新，請重新排程。')};
+$('schedule-btn').onclick=()=>{data.result=TP.schedule(data,TP.anchorFor(new Date()));data.dirty=false;save();render();notify('已重新產生排程。')};
+$('demo-btn').onclick=()=>{if((data.tasks.length||data.events.length)&&!confirm('載入範例會取代目前的待辦、行程與設定。確定繼續？'))return;data=blank();const today=TP.dateKey(new Date());data.tasks=[{id:uid(),name:'完成課堂簡報',due:TP.addDays(today,3),minutes:240,priority:'high',order:0,done:false},{id:uid(),name:'閱讀指定文章',due:TP.addDays(today,5),minutes:180,priority:'medium',order:1,done:false},{id:uid(),name:'整理作品說明',due:TP.addDays(today,6),minutes:120,priority:'low',order:2,done:false}];data.nextOrder=3;data.events=[{id:uid(),name:'課程討論',date:TP.addDays(today,1),start:'10:00',end:'12:00'},{id:uid(),name:'午餐與散步',date:TP.addDays(today,1),start:'12:00',end:'13:00'},{id:uid(),name:'小組會議',date:TP.addDays(today,2),start:'14:00',end:'15:30'}];data.result=TP.schedule(data,TP.anchorFor(new Date()));data.dirty=false;selected=TP.addDays(today,1);save();render();notify('已載入虛構範例，可自由編輯。')};
+// A date rollover makes the old 14-day plan visibly stale without changing user data.
+let lastDay=TP.dateKey(new Date());setInterval(()=>{const day=TP.dateKey(new Date());if(day!==lastDay){lastDay=day;render()}},30000);
+render();
+})();
+</script>
+</body></html>
